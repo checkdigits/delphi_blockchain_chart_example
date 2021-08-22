@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{EABC8A74-42AD-43D0-8D57-2EDDD90088BF}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="blockchain_chart.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\deepai_api\deepAiApi.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="blockchain_chart">
+        <MSBuild Projects="blockchain_chart.dproj"/>
+    </Target>
+    <Target Name="blockchain_chart:Clean">
+        <MSBuild Projects="blockchain_chart.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="blockchain_chart:Make">
+        <MSBuild Projects="blockchain_chart.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="deepAiApi">
+        <MSBuild Projects="..\deepai_api\deepAiApi.dproj"/>
+    </Target>
+    <Target Name="deepAiApi:Clean">
+        <MSBuild Projects="..\deepai_api\deepAiApi.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="deepAiApi:Make">
+        <MSBuild Projects="..\deepai_api\deepAiApi.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="blockchain_chart;deepAiApi"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="blockchain_chart:Clean;deepAiApi:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="blockchain_chart:Make;deepAiApi:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
